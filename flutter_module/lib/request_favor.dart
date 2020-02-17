@@ -52,6 +52,7 @@ class RequestFavorPageState extends State<RequestFavorPage> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
+              Text("Request favor to: "),
               DropdownButtonFormField<Friend>(
                 value: _selectedFriend,
                 onChanged: (friend) {
@@ -62,10 +63,10 @@ class RequestFavorPageState extends State<RequestFavorPage> {
                 items: widget.friends
                     .map(
                       (f) => DropdownMenuItem<Friend>(
-                    value: f,
-                    child: Text(f.name),
-                  ),
-                )
+                        value: f,
+                        child: Text(f.name),
+                      ),
+                    )
                     .toList(),
                 validator: (friend) {
                   if (friend == null) {
@@ -96,6 +97,7 @@ class RequestFavorPageState extends State<RequestFavorPage> {
                 inputType: InputType.both,
                 format: DateFormat("EEEE, MMMM d, yyyy 'at' h:mma"),
                 editable: false,
+                onFieldSubmitted: (date) {},
                 decoration: InputDecoration(
                     labelText: 'Date/Time', hasFloatingPlaceholder: false),
                 validator: (dateTime) {
@@ -104,6 +106,7 @@ class RequestFavorPageState extends State<RequestFavorPage> {
                   }
                   return null;
                 },
+//                onChanged: ,
               ),
             ],
           ),
@@ -113,9 +116,9 @@ class RequestFavorPageState extends State<RequestFavorPage> {
   }
 
   void save() {
-//    if (_formKey.currentState.validate()) {
+    if (_formKey.currentState.validate()) {
       // store the favor request on firebase
       Navigator.pop(context);
-//    }
+    }
   }
 }
