@@ -28,87 +28,90 @@ class RequestFavorPageState extends State<RequestFavorPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Requesting a favor"),
-        leading: CloseButton(),
-        actions: <Widget>[
-          Builder(
-            builder: (context) => FlatButton(
-              colorBrightness: Brightness.dark,
-              child: Text("SAVE"),
-              onPressed: () {
-                RequestFavorPageState.of(context).save();
-              },
+    return Hero(
+      tag: "request_favor",
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text("Requesting a favor"),
+          leading: CloseButton(),
+          actions: <Widget>[
+            Builder(
+              builder: (context) => FlatButton(
+                colorBrightness: Brightness.dark,
+                child: Text("SAVE"),
+                onPressed: () {
+                  RequestFavorPageState.of(context).save();
+                },
+              ),
             ),
-          ),
-        ],
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text("Request favor to: "),
-              DropdownButtonFormField<Friend>(
-                value: _selectedFriend,
-                onChanged: (friend) {
-                  setState(() {
-                    _selectedFriend = friend;
-                  });
-                },
-                items: widget.friends
-                    .map(
-                      (f) => DropdownMenuItem<Friend>(
-                        value: f,
-                        child: Text(f.name),
-                      ),
-                    )
-                    .toList(),
-                validator: (friend) {
-                  if (friend == null) {
-                    return "You must select a friend to ask the favor";
-                  }
-                  return null;
-                },
-              ),
-              Container(
-                height: 16.0,
-              ),
-              Text("Favor description:"),
-              TextFormField(
-                maxLines: 5,
-                inputFormatters: [LengthLimitingTextInputFormatter(200)],
-                validator: (value) {
-                  if (value.isEmpty) {
-                    return "You must detail the favor";
-                  }
-                  return null;
-                },
-              ),
-              Container(
-                height: 16.0,
-              ),
-              Text("Due Date:"),
-              DateTimePickerFormField(
-                inputType: InputType.both,
-                format: DateFormat("EEEE, MMMM d, yyyy 'at' h:mma"),
-                editable: false,
-                onFieldSubmitted: (date) {},
-                decoration: InputDecoration(
-                    labelText: 'Date/Time', hasFloatingPlaceholder: false),
-                validator: (dateTime) {
-                  if (dateTime == null) {
-                    return "You must select a due date time for the favor";
-                  }
-                  return null;
-                },
+          ],
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text("Request favor to: "),
+                DropdownButtonFormField<Friend>(
+                  value: _selectedFriend,
+                  onChanged: (friend) {
+                    setState(() {
+                      _selectedFriend = friend;
+                    });
+                  },
+                  items: widget.friends
+                      .map(
+                        (f) => DropdownMenuItem<Friend>(
+                          value: f,
+                          child: Text(f.name),
+                        ),
+                      )
+                      .toList(),
+                  validator: (friend) {
+                    if (friend == null) {
+                      return "You must select a friend to ask the favor";
+                    }
+                    return null;
+                  },
+                ),
+                Container(
+                  height: 16.0,
+                ),
+                Text("Favor description:"),
+                TextFormField(
+                  maxLines: 5,
+                  inputFormatters: [LengthLimitingTextInputFormatter(200)],
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return "You must detail the favor";
+                    }
+                    return null;
+                  },
+                ),
+                Container(
+                  height: 16.0,
+                ),
+                Text("Due Date:"),
+                DateTimePickerFormField(
+                  inputType: InputType.both,
+                  format: DateFormat("EEEE, MMMM d, yyyy 'at' h:mma"),
+                  editable: false,
+                  onFieldSubmitted: (date) {},
+                  decoration: InputDecoration(
+                      labelText: 'Date/Time', hasFloatingPlaceholder: false),
+                  validator: (dateTime) {
+                    if (dateTime == null) {
+                      return "You must select a due date time for the favor";
+                    }
+                    return null;
+                  },
 //                onChanged: ,
-              ),
-            ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

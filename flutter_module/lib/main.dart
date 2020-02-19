@@ -87,7 +87,7 @@ class FavorsPageState extends State<FavorsPage> {
       length: 4,
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Your favors"),
+          title: Text("Your favors!!!"),
           bottom: TabBar(
             isScrollable: true,
             tabs: [
@@ -107,6 +107,7 @@ class FavorsPageState extends State<FavorsPage> {
           ],
         ),
         floatingActionButton: FloatingActionButton(
+          heroTag: "request_favor",
           onPressed: () {
             Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => RequestFavorPage(
